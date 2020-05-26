@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2020_05_22_205538) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "challenges", force: :cascade do |t|
     t.string "definition"
-    t.integer "difficulty_id", null: false
-    t.integer "duration_id", null: false
+    t.bigint "difficulty_id", null: false
+    t.bigint "duration_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["difficulty_id"], name: "index_challenges_on_difficulty_id"
@@ -37,8 +40,8 @@ ActiveRecord::Schema.define(version: 2020_05_22_205538) do
   end
 
   create_table "user_challenges", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "challenge_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "challenge_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["challenge_id"], name: "index_user_challenges_on_challenge_id"
@@ -46,7 +49,8 @@ ActiveRecord::Schema.define(version: 2020_05_22_205538) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
